@@ -39,7 +39,7 @@ public class BookController {
 
     //Get All by BookId
     @GetMapping(value = "/getBy/{BookId}")
-    public ResponseEntity<String> getBookDataById(@PathVariable int BookId)
+    public ResponseEntity<String> getBookDataById(@PathVariable Integer BookId)
     {
         Optional<Book> Book = bookService.getBookDataById(BookId);
         ResponseDTO dto = new ResponseDTO("Data retrieved successfully by id (:",Book);
@@ -48,7 +48,7 @@ public class BookController {
 
     //Delete by id
     @DeleteMapping("/delete/{BookId}")
-    public ResponseEntity<String> deleteRecordById(@PathVariable int BookId){
+    public ResponseEntity<String> deleteRecordById(@PathVariable Integer BookId){
         ResponseDTO dto = new ResponseDTO("Book Record deleted successfully", bookService.deleteRecordById(BookId));
         return new ResponseEntity(dto,HttpStatus.OK);
     }
@@ -61,7 +61,5 @@ public class BookController {
         ResponseDTO dto = new ResponseDTO(" Book Record updated successfully by Id",updateRecord);
         return new ResponseEntity(dto,HttpStatus.ACCEPTED);
     }
-
-
 
 }

@@ -23,7 +23,7 @@ public class BookExceptionHandler {
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(BookStoreException.class)
-    public ResponseEntity<ResponseDTO> handleEmployeeNotFound(BookStoreException exception) {
+    public ResponseEntity<ResponseDTO> employeeNotFoundHandler(BookStoreException exception) {
         ResponseDTO response = new ResponseDTO("Invalid input", exception.getMessage());
         return new ResponseEntity<ResponseDTO>(response, HttpStatus.BAD_REQUEST);
     }

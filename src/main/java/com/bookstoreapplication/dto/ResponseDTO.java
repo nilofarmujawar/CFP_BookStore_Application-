@@ -1,6 +1,5 @@
 package com.bookstoreapplication.dto;
 
-
 import lombok.Data;
 
 @Data
