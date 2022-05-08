@@ -2,12 +2,17 @@ package com.bookstoreapplication.repository;
 
 import com.bookstoreapplication.model.Book;
 import com.bookstoreapplication.model.Cart;
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
+
+
+/**
+ * Created BookStoreRepository class extending JpaRepository for CRUD operations and for some custom query methods
+ */
 
 @Repository
 public interface BookStoreRepository extends JpaRepository<Book,Integer> {
@@ -20,4 +25,6 @@ public interface BookStoreRepository extends JpaRepository<Book,Integer> {
 
     @Query(value = "select * from book order by price desc", nativeQuery = true)
     List<Book> getSortedListOfBooksInDesc();
+
+
 }

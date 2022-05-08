@@ -12,6 +12,9 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 public class Book {
+    /**
+     * variables
+     */
     @Id
     @GeneratedValue
     private Integer bookId;
@@ -22,6 +25,10 @@ public class Book {
     private Integer price;
     private Integer quantity;
 
+    /**
+     *  parameterized constructor
+     * @param bookDTO - all book data
+     */
     public Book(BookDTO bookDTO){
         this.authorName=bookDTO.getAuthorName();
         this.bookDescription=bookDTO.getBookDescription();
@@ -30,6 +37,12 @@ public class Book {
         this.quantity=bookDTO.getQuantity();
         this.bookName=bookDTO.getBookName();
     }
+
+    /**
+     * parameterized constructor
+     * @param bookId - book id
+     * @param bookDTO - all book data
+     */
     public Book(Integer bookId, BookDTO bookDTO){
         this.bookId=bookId;
         this.bookName=bookDTO.getBookName();
