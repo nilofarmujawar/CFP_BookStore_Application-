@@ -104,7 +104,10 @@ public class OrderService implements IOrderService {
         Optional<UserRegistration> user = userRepo.findById(dto.getUserId());
         if (order.isPresent()) {
             if (book.isPresent() && user.isPresent()) {
-                if (dto.getQuantity() < book.get().getQuantity()) {
+                if (dto.getQuantity() <= book.get().getQuantity()) {
+                    int quantity = book.get().getQuantity()-dto.getQuantity();
+                    book.get().setQuantity(quantity);
+                    bookRepo.save(book.get());
                     Order newOrder = new Order(id, book.get().getPrice(), dto.getQuantity(), dto.getAddress(), book.get(), user.get(), dto.isCancel());
                     orderRepo.save(newOrder);
                     log.info("Order record updated successfully for id " + id);
