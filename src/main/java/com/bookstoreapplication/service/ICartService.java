@@ -13,9 +13,9 @@ public interface ICartService {
 
     ResponseDTO getCartDetails();
 
-    Optional<Cart> getCartDetailsById(Integer cartId);
+    Cart getCartDetailsById(Integer cartId);
 
-    Optional<Cart> deleteCartItemById(Integer cartId);
+    Cart deleteCartItemById(Integer cartId);
 
     Cart updateRecordById(Integer cartId, CartDTO cartDTO);
 

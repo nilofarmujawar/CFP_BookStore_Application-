@@ -87,10 +87,10 @@ public class CartService implements ICartService{
      * @return - cart data by id
      */
     @Override
-    public Optional<Cart> getCartDetailsById(Integer cartId) {
+    public Cart getCartDetailsById(Integer cartId) {
         Optional<Cart> getCartData=bookStoreCartRepository.findById(cartId);
         if (getCartData.isPresent()){
-            return getCartData;
+            return getCartData.get();
         }
         else {
             throw new BookStoreException(" Didn't find any record for this particular cartId");
@@ -122,11 +122,11 @@ public class CartService implements ICartService{
      * @return - cartId and Acknowledgment message
      */
     @Override
-    public Optional<Cart> deleteCartItemById(Integer cartId) {
+    public Cart deleteCartItemById(Integer cartId) {
         Optional<Cart> deleteData=bookStoreCartRepository.findById(cartId);
         if (deleteData.isPresent()){
             bookStoreCartRepository.deleteById(cartId);
-            return deleteData;
+            return deleteData.get();
         }
         else {
             throw new BookStoreException(" Did not get any cart for specific cart id ");

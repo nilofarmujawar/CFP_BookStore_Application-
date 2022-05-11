@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface IUserService {
 
-   String addUser(UserDTO userDTO);
+    String addUser(UserDTO userDTO);
 
     List<UserRegistration> getAllUsers();
 

@@ -11,14 +11,23 @@ import java.util.Optional;
  */
 
 public interface IBookService {
+
     Book createBook(BookDTO bookDTO);
 
-    Optional<Book> getBookDataById(int BookId);
+    Book getBookDataById(int BookId);
 
     List<Book> getAllBookData();
 
     Book updateRecordById(Integer BookId, BookDTO bookDTO);
 
     Object deleteRecordById(int BookId);
+
+    List<Book> getBookByName(String bookName);
+
+    List<Book> sortedListOfBooksInAscendingOrder();
+
+    List<Book> sortedListOfBooksInDescendingOrder();
+
+    List<Book> getBookByAuthorName(String authorName);
 
 }

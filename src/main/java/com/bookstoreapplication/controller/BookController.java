@@ -52,7 +52,7 @@ public class BookController {
      * @param bookDTO - book data
      * @return :- responseDTO
      */
-
+//response entity ka object return kar rhe hai o string type ka hoga
     @PostMapping("/insert")
     public ResponseEntity<String> addBookToRepository(@Valid @RequestBody BookDTO bookDTO){
         Book newBook= bookService.createBook(bookDTO);
@@ -65,8 +65,7 @@ public class BookController {
      * @return :- showing all data
      */
     @GetMapping(value = "/getAll")
-    public ResponseEntity<String> getAllBookData()
-    {
+    public ResponseEntity<String> getAllBookData() {
         List<Book> listOfBooks = bookService.getAllBookData();
         ResponseDTO dto = new ResponseDTO("Data retrieved successfully (:",listOfBooks);
         return new ResponseEntity(dto,HttpStatus.OK);
@@ -81,10 +80,9 @@ public class BookController {
      * @param BookId - book id
      * @return -book information with same bookId in JSON format
      */
-    @GetMapping(value = "/getBy/{BookId}")
-    public ResponseEntity<String> getBookDataById(@PathVariable Integer BookId)
-    {
-        Optional<Book> Book = bookService.getBookDataById(BookId);
+    @GetMapping(value = "/getById/{BookId}")
+    public ResponseEntity<String> getBookDataById(@PathVariable Integer BookId) {
+        Book Book = bookService.getBookDataById(BookId);
         ResponseDTO dto = new ResponseDTO("Data retrieved successfully by id (:",Book);
         return new ResponseEntity(dto,HttpStatus.OK);
     }
@@ -117,6 +115,57 @@ public class BookController {
         Book updateRecord = bookService.updateRecordById(BookId,bookDTO);
         ResponseDTO dto = new ResponseDTO(" Book Record updated successfully by Id",updateRecord);
         return new ResponseEntity(dto,HttpStatus.ACCEPTED);
+    }
+
+    /**
+     * create a method name as getBookByName
+     * Ability to get book by book name
+     * @param name - book name
+     * @return - book data
+     */
+    @GetMapping("searchByBookName/{name}")
+    public ResponseEntity<ResponseDTO> getBookByName(@PathVariable("name") String name)
+    {
+        List<Book> listOfBooks = bookService.getBookByName(name);
+        ResponseDTO dto = new ResponseDTO("Data retrieved successfully (:",listOfBooks);
+        return new ResponseEntity(dto,HttpStatus.OK);
+    }
+
+    /**
+     * ability to get book data in ascending order
+     * @return - data in ascending order
+     */
+    @GetMapping("/sortAsc")
+    public ResponseEntity<ResponseDTO> getBooksInAscendingOrder()
+    {
+        List<Book> listOfBooks = bookService.sortedListOfBooksInAscendingOrder();
+        ResponseDTO dto = new ResponseDTO("Data retrieved successfully (:",listOfBooks);
+        return new ResponseEntity(dto,HttpStatus.OK);
+    }
+
+    /**
+     * ability to get book data in descending order
+     * @return - data in descending order
+     */
+    @GetMapping("/sortDesc")
+    public ResponseEntity<ResponseDTO> getBooksInDescendingOrder()
+    {
+        List<Book> listOfBooks =bookService.sortedListOfBooksInDescendingOrder();
+        ResponseDTO dto = new ResponseDTO("Data retrieved successfully (:",listOfBooks);
+        return new ResponseEntity(dto,HttpStatus.OK);
+    }
+
+    /**
+     * Ability to get book data by author name.
+     * @param authorName - put author-name in url
+     * @return - book data by author name
+     */
+    @GetMapping("searchByAuthorName/{authorName}")
+    public ResponseEntity<ResponseDTO> getBookByAuthorName(@PathVariable("authorName") String authorName)
+    {
+        List<Book> listOfBooks = bookService.getBookByAuthorName(authorName);
+        ResponseDTO dto = new ResponseDTO("Data retrieved successfully (:",listOfBooks);
+        return new ResponseEntity(dto,HttpStatus.OK);
     }
 
 }

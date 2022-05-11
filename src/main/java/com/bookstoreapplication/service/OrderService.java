@@ -56,7 +56,7 @@ public class OrderService implements IOrderService {
                 log.info("Order record inserted successfully");
                 return newOrder;
             } else {
-                throw new BookStoreException("Requested quantity is not available");
+                throw new BookStoreException("Requested quantity is out of stock");
             }
         } else {
             throw new BookStoreException("Book or User doesn't exists");
@@ -136,6 +136,27 @@ public class OrderService implements IOrderService {
         if (order.isPresent()) {
             orderRepo.deleteById(id);
             log.info("Order record deleted successfully for id " + id);
+            return order.get();
+
+        } else {
+            throw new BookStoreException("Order Record doesn't exists");
+        }
+    }
+
+    /**
+     * create a method name as cancelOrder
+     * @param id - order id
+     * @return - order id cancel
+     */
+    public Order cancelOrder(Integer id) {
+        Optional<Order> order = orderRepo.findById(id);
+        if (order.isPresent()) {
+            order.get().setCancel(true);
+            Book book = order.get().getBook();
+            book.setQuantity(book.getQuantity() + order.get().getQuantity());
+           bookRepo.save(book);
+            orderRepo.deleteById(id);
+            log.info("Order record cancel successfully for id " + id);
             return order.get();
 
         } else {

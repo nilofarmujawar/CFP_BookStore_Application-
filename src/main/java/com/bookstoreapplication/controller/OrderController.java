@@ -46,7 +46,7 @@ public class OrderController {
     @PostMapping("/insert")
     public ResponseEntity<ResponseDTO> insertOrder(@Valid @RequestBody OrderDTO orderdto){
         Order newOrder = orderService.insertOrder(orderdto);
-        ResponseDTO dto = new ResponseDTO("User registered successfully !",newOrder);
+        ResponseDTO dto = new ResponseDTO("Order placed successfully !",newOrder);
         return new ResponseEntity(dto, HttpStatus.CREATED);
     }
 
@@ -96,5 +96,17 @@ public class OrderController {
         Order newOrder = orderService.deleteOrderRecord(id);
         ResponseDTO dto = new ResponseDTO("Record deleted successfully !",newOrder);
         return new ResponseEntity(dto,HttpStatus.ACCEPTED);
+    }
+
+    /**
+     * Ability to cancel order of particular id entered by user
+     * @param id - order id
+     * @return - cancel order by particular id
+     */
+    @GetMapping("/cancelOrder/{id}")
+    public ResponseEntity<ResponseDTO> getCancelOrder(@PathVariable Integer id){
+      Order deletedOrder = orderService.cancelOrder(id);
+        ResponseDTO dto = new ResponseDTO("Cancel order successfully !",deletedOrder);
+        return new ResponseEntity(dto,HttpStatus.OK);
     }
 }

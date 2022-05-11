@@ -69,7 +69,7 @@ public class CartController {
      */
     @GetMapping("/getById/{cartId}")
     public ResponseEntity<ResponseDTO> getCartDetailsById(@PathVariable Integer cartId){
-        Optional<Cart> specificCartDetail=cartService.getCartDetailsById(cartId);
+       Cart specificCartDetail=cartService.getCartDetailsById(cartId);
         ResponseDTO responseDTO=new ResponseDTO("Cart details retrieved successfully",specificCartDetail);
         return new ResponseEntity(responseDTO,HttpStatus.ACCEPTED);
     }
@@ -93,7 +93,7 @@ public class CartController {
      */
     @DeleteMapping("/delete/{cartId}")
     public ResponseEntity<ResponseDTO> deleteCartById(@PathVariable Integer cartId) {
-        Optional<Cart> delete = cartService.deleteCartItemById(cartId);
+        Cart delete = cartService.deleteCartItemById(cartId);
         ResponseDTO responseDTO = new ResponseDTO("Cart delete successfully", delete);
         return new ResponseEntity(responseDTO, HttpStatus.OK);
     }

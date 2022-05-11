@@ -18,4 +18,6 @@ public interface IOrderService {
     public Order updateOrderRecord(Integer id, OrderDTO dto);
 
     public Order deleteOrderRecord(Integer id);
+
+    public  Order cancelOrder(Integer id);
 }

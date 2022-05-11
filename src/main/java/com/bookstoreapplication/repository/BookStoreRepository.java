@@ -26,5 +26,8 @@ public interface BookStoreRepository extends JpaRepository<Book,Integer> {
     @Query(value = "select * from book order by price desc", nativeQuery = true)
     List<Book> getSortedListOfBooksInDesc();
 
+    @Query(value = "select * from book where author_name like :authorName%", nativeQuery = true)
+    List<Book> findByBookAuthorName(String authorName);
+
 
 }
